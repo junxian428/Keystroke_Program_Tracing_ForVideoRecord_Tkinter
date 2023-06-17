@@ -10,6 +10,7 @@ FADE_INTERVAL = 10
 FADE_STEP = 0.1
 BACKGROUND_COLOR = "#808080"
 TRANSPARENCY = 0.8
+OUTPUT_FILE = "keystrokes.txt"
 
 class KeystrokeWindow:
     def __init__(self, keystroke):
@@ -44,10 +45,16 @@ class KeystrokeWindow:
                 time.sleep(FADE_INTERVAL / 1000)
 
         self.close_window()
+        #self.write_to_file()
 
+    #def write_to_file(self):
+    #    with open(OUTPUT_FILE, "a") as file:
+    #        file.write(self.keystroke + "\n")
 
 def on_key_press(event):
     keystroke = event.name
+    with open(OUTPUT_FILE, "a") as file:
+        file.write(keystroke + "\n")
     if not keystroke_windows:
         fade_all_windows()
     keystroke_windows.append(KeystrokeWindow(keystroke))
